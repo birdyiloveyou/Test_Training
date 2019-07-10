@@ -6,6 +6,29 @@ using System.Text;
 
 namespace IsolatedByInheritanceAndOverride
 {
+    /// <summary>
+    /// not complete yet
+    /// </summary>
+    public class BookDao
+    {
+        public virtual void Insert(Order order)
+        {
+            // directly depend on some web service
+            //var client = new HttpClient();
+            //var response = client.PostAsync<Order>("http://api.joey.io/Order", order, new JsonMediaTypeFormatter()).Result;
+            //response.EnsureSuccessStatusCode();
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Order
+    {
+        public string CustomerName { get; set; }
+        public int Price { get; set; }
+        public string ProductName { get; set; }
+        public string Type { get; set; }
+    }
+
     public class OrderService
     {
         /// <summary>
@@ -13,14 +36,24 @@ namespace IsolatedByInheritanceAndOverride
         /// </summary>
         private string _filePath = @"C:\temp\testOrders.csv";
 
+        public virtual List<Order> Get()
+        {
+            return this.GetOrders();
+        }
+
+        public virtual BookDao GetBookDao()
+        {
+            return new BookDao();
+        }
+
         public void SyncBookOrders()
         {
-            var orders = this.GetOrders();
+            var orders = Get();
 
             // only get orders of book
             var ordersOfBook = orders.Where(x => x.Type == "Book");
 
-            var bookDao = new BookDao();
+            var bookDao = GetBookDao();
             foreach (var order in ordersOfBook)
             {
                 bookDao.Insert(order);
@@ -33,9 +66,9 @@ namespace IsolatedByInheritanceAndOverride
             var result = new List<Order>();
 
             // directly depend on File I/O
-            using (StreamReader sr = new StreamReader(this._filePath, Encoding.UTF8))
+            using (var sr = new StreamReader(this._filePath, Encoding.UTF8))
             {
-                int rowCount = 0;
+                var rowCount = 0;
 
                 while (sr.Peek() > -1)
                 {
@@ -67,32 +100,6 @@ namespace IsolatedByInheritanceAndOverride
             };
 
             return result;
-        }
-    }
-
-    public class Order
-    {
-        public string Type { get; set; }
-
-        public int Price { get; set; }
-
-        public string ProductName { get; set; }
-
-        public string CustomerName { get; set; }
-    }
-
-    /// <summary>
-    /// not complete yet
-    /// </summary>
-    public class BookDao
-    {
-        internal void Insert(Order order)
-        {
-            // directly depend on some web service
-            //var client = new HttpClient();
-            //var response = client.PostAsync<Order>("http://api.joey.io/Order", order, new JsonMediaTypeFormatter()).Result;
-            //response.EnsureSuccessStatusCode();
-            throw new NotImplementedException();
         }
     }
 }

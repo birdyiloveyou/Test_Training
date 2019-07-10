@@ -15,10 +15,10 @@ namespace ServerApiDependency
             const string apiPage = "cancel.php";
             try
             {
-                var response = PostToThirdParty(ApiType.CancelGame, apiPage);
+                var response = Response(apiPage);
                 if (response != (int)ServerResponse.Correct)
                 {
-                    TiDebugHelper.Error($"{apiPage} response has error, ErrorCode = {response}");
+                    TiDebug(apiPage, response);
                     if (response == (int)ServerResponse.AuthFail)
                     {
                         throw new AuthFailException();
@@ -81,6 +81,16 @@ namespace ServerApiDependency
                 SaveFailRequestToDb(ApiType.StartGame, apiPage);
                 throw e;
             }
+        }
+
+        internal virtual int Response(string apiPage)
+        {
+            return PostToThirdParty(ApiType.CancelGame, apiPage);
+        }
+
+        internal virtual void TiDebug(string apiPage, int response)
+        {
+            TiDebugHelper.Error($"{apiPage} response has error, ErrorCode = {response}");
         }
 
         /// <summary>

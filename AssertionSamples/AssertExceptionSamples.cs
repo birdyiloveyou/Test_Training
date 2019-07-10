@@ -10,14 +10,18 @@ namespace AssertionSamples
         public void Divide_positive()
         {
             var calculator = new Calculator();
+
             var actual = calculator.Divide(5, 2);
+
             Assert.AreEqual(2.5m, actual);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(YouShallNotPassException))]
         public void Divide_Zero()
         {
             var calculator = new Calculator();
+
             var actual = calculator.Divide(5, 0);
 
             //how to assert expected exception?

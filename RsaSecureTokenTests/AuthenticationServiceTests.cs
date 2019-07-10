@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NSubstitute;
 
 namespace RsaSecureToken.Tests
 {
@@ -14,10 +15,13 @@ namespace RsaSecureToken.Tests
         [TestMethod()]
         public void IsValidTest()
         {
-            var sut = new AuthenticationService();
+            var rrr = Substitute.For<RsaTokenDao>();
+            var ppp = Substitute.For<ProfileDao>();
+            ppp.GetRegisterTimeInMinutes(Arg.Any<string>()).ReturnsForAnyArgs(1);
+            rrr.GetRandom(Arg.Any<int>()).ReturnsForAnyArgs(new Random(200));
+            var sut = new AuthenticationService(ppp, rrr);
 
-			// implement your own act
-            var actual = sut.IsValid("","");
+            var actual = sut.IsValid("", "211305");
 
             Assert.IsTrue(actual);
         }

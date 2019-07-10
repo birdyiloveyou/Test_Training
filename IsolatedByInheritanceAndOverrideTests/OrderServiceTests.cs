@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
+using NSubstitute.Extensions;
 
 namespace IsolatedByInheritanceAndOverride.Tests
 {
@@ -20,7 +23,38 @@ namespace IsolatedByInheritanceAndOverride.Tests
             //var target = new OrderService();
             //target.SyncBookOrders();
             //verify bookDao.Insert() twice
-            Assert.Fail();
+            var list = new List<Order>();
+            list.Add(new Order()
+            {
+                ProductName = "商品1",
+                Type = "Book",
+                Price = 100,
+                CustomerName = "Kyo"
+            });
+            list.Add(new Order()
+            {
+                ProductName = "商品2",
+                Type = "DVD",
+                Price = 200,
+                CustomerName = "Kyo"
+            });
+            list.Add(new Order()
+            {
+                ProductName = "商品3",
+                Type = "Book",
+                Price = 300,
+                CustomerName = "Joey"
+            });
+
+            var FakeOrderService = Substitute.For<OrderService>();
+            var FakeBookDao = Substitute.For<BookDao>();
+            FakeBookDao.When(x => x.Insert(Arg.Any<Order>())).Do(y => { });
+            FakeOrderService.Get().ReturnsForAnyArgs(list);
+            FakeOrderService.GetBookDao().ReturnsForAnyArgs(FakeBookDao);
+
+            FakeOrderService.SyncBookOrders();
+
+            FakeBookDao.Received(2).Insert(Arg.Any<Order>());
         }
     }
 }

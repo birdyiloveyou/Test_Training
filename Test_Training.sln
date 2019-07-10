@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApiDependency", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApiDependencyTests", "ServerApiDependencyTests\ServerApiDependencyTests.csproj", "{8C57D0F9-2714-494F-A617-4C384C41CFA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseWord", "ReverseWord\ReverseWord.csproj", "{14A282E7-8A61-4C0C-9678-50A911F4454C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseWordTests", "ReverseWordTests\ReverseWordTests.csproj", "{F4D026ED-1581-4AD7-9228-C81EF63277C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{8C57D0F9-2714-494F-A617-4C384C41CFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C57D0F9-2714-494F-A617-4C384C41CFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C57D0F9-2714-494F-A617-4C384C41CFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A282E7-8A61-4C0C-9678-50A911F4454C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A282E7-8A61-4C0C-9678-50A911F4454C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A282E7-8A61-4C0C-9678-50A911F4454C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A282E7-8A61-4C0C-9678-50A911F4454C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D026ED-1581-4AD7-9228-C81EF63277C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D026ED-1581-4AD7-9228-C81EF63277C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D026ED-1581-4AD7-9228-C81EF63277C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D026ED-1581-4AD7-9228-C81EF63277C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
